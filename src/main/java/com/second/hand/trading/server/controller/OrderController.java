@@ -6,6 +6,8 @@ import com.second.hand.trading.server.service.OrderService;
 import com.second.hand.trading.server.utils.IdFactoryUtil;
 import com.second.hand.trading.server.utils.OrderTaskHandler;
 import com.second.hand.trading.server.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +17,14 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/order")
+@Api(tags = "订单管理")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     @PostMapping("/add")
+    @ApiOperation("添加订单")
     public ResultVo addOrder(@CookieValue("shUserId")
                              @NotNull(message = "登录异常 请重新登录")
                              @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -40,6 +44,7 @@ public class OrderController {
     }
 
     @GetMapping("/info")
+    @ApiOperation("获取订单信息")
     public ResultVo getOrderInfo(@CookieValue("shUserId")
                                  @NotNull(message = "登录异常 请重新登录")
                                  @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -53,6 +58,7 @@ public class OrderController {
     }
 
     @PostMapping("/update")
+    @ApiOperation("更新订单信息")
     public ResultVo updateOrder(@CookieValue("shUserId")
                              @NotNull(message = "登录异常 请重新登录")
                              @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -67,6 +73,7 @@ public class OrderController {
     }
 
     @GetMapping("/my")
+    @ApiOperation("获取某个用户买到的闲置的订单列表")
     public ResultVo getMyOrder(@CookieValue("shUserId")
                                  @NotNull(message = "登录异常 请重新登录")
                                  @NotEmpty(message = "登录异常 请重新登录") String shUserId){
@@ -74,6 +81,7 @@ public class OrderController {
     }
 
     @GetMapping("/my-sold")
+    @ApiOperation("获取某个用户卖出的闲置的订单信息")
     public ResultVo getMySoldIdle(@CookieValue("shUserId")
                                @NotNull(message = "登录异常 请重新登录")
                                @NotEmpty(message = "登录异常 请重新登录") String shUserId){

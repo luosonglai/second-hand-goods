@@ -9,6 +9,8 @@ import com.second.hand.trading.server.service.IdleItemService;
 import com.second.hand.trading.server.service.OrderService;
 import com.second.hand.trading.server.service.UserService;
 import com.second.hand.trading.server.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("admin")
+@Api(tags = "管理员管理")
 public class AdminController {
 
     @Autowired
@@ -33,6 +36,7 @@ public class AdminController {
     private UserService userService;
 
     @GetMapping("login")
+    @ApiOperation("管理员登录")
     public ResultVo login(@RequestParam("accountNumber") @NotNull @NotEmpty String accountNumber,
                           @RequestParam("adminPassword") @NotNull @NotEmpty String adminPassword,
                           HttpSession session){
@@ -45,12 +49,14 @@ public class AdminController {
     }
 
     @GetMapping("loginOut")
+    @ApiOperation("管理员退出")
     public ResultVo loginOut( HttpSession session){
         session.removeAttribute("admin");
         return ResultVo.success();
     }
 
     @GetMapping("list")
+    @ApiOperation("管理员列表")
     public ResultVo getAdminList(HttpSession session,
                                  @RequestParam(value = "page",required = false) Integer page,
                                  @RequestParam(value = "nums",required = false) Integer nums){
@@ -69,6 +75,7 @@ public class AdminController {
     }
 
     @PostMapping("add")
+    @ApiOperation("添加管理员")
     public ResultVo addAdmin(HttpSession session,
                              @RequestBody AdminModel adminModel){
         if(session.getAttribute("admin")==null){
@@ -81,6 +88,7 @@ public class AdminController {
     }
 
     @GetMapping("idleList")
+    @ApiOperation("闲置物品(管理员可见)")
     public ResultVo idleList(HttpSession session,
                              @RequestParam("status") @NotNull @NotEmpty Integer status,
                              @RequestParam(value = "page",required = false) Integer page,
@@ -100,6 +108,7 @@ public class AdminController {
     }
 
     @GetMapping("updateIdleStatus")
+    @ApiOperation("修改闲置物品状态")
     public ResultVo updateIdleStatus(HttpSession session,
                                      @RequestParam("id") @NotNull @NotEmpty Long id,
                                      @RequestParam("status") @NotNull @NotEmpty Integer status
@@ -117,6 +126,7 @@ public class AdminController {
     }
 
     @GetMapping("orderList")
+    @ApiOperation("订单列表")
     public ResultVo orderList(HttpSession session,
                               @RequestParam(value = "page",required = false) Integer page,
                               @RequestParam(value = "nums",required = false) Integer nums){
@@ -135,6 +145,7 @@ public class AdminController {
     }
 
     @GetMapping("deleteOrder")
+    @ApiOperation("删除订单")
     public ResultVo deleteOrder(HttpSession session,
                               @RequestParam("id") @NotNull @NotEmpty Long id){
         if(session.getAttribute("admin")==null){
@@ -147,6 +158,7 @@ public class AdminController {
     }
 
     @GetMapping("userList")
+    @ApiOperation("用户列表")
     public ResultVo userList(HttpSession session,
                              @RequestParam(value = "page",required = false) Integer page,
                              @RequestParam(value = "nums",required = false) Integer nums,
@@ -166,6 +178,7 @@ public class AdminController {
     }
 
     @GetMapping("updateUserStatus")
+    @ApiOperation("更改用户状态")
     public ResultVo updateUserStatus(HttpSession session,
                                      @RequestParam("id") @NotNull @NotEmpty Long id,
                                      @RequestParam("status") @NotNull @NotEmpty Integer status){

@@ -4,6 +4,8 @@ import com.second.hand.trading.server.enums.ErrorMsg;
 import com.second.hand.trading.server.model.MessageModel;
 import com.second.hand.trading.server.service.MessageService;
 import com.second.hand.trading.server.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +15,14 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/message")
+@Api(tags = "留言管理")
 public class MessageController {
 
     @Autowired
     private MessageService messageService;
 
     @PostMapping("/send")
+    @ApiOperation("发送留言")
     public ResultVo sendMessage(@CookieValue("shUserId")
                                 @NotNull(message = "登录异常 请重新登录")
                                 @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -32,16 +36,19 @@ public class MessageController {
     }
 
     @GetMapping("/info")
+    @ApiOperation("获取某个留言信息")
     public ResultVo getMessage(@RequestParam Long id){
         return ResultVo.success(messageService.getMessage(id));
     }
 
     @GetMapping("/idle")
+    @ApiOperation("获取闲置物品留言信息")
     public ResultVo getAllIdleMessage(@RequestParam Long idleId){
         return ResultVo.success(messageService.getAllIdleMessage(idleId));
     }
 
     @GetMapping("/my")
+    @ApiOperation("获取某个用户收到的所有留言")
     public ResultVo getAllMyMessage(@CookieValue("shUserId")
                                         @NotNull(message = "登录异常 请重新登录")
                                         @NotEmpty(message = "登录异常 请重新登录") String shUserId){
@@ -49,6 +56,7 @@ public class MessageController {
     }
 
     @GetMapping("/delete")
+    @ApiOperation("删除留言")
     public ResultVo deleteMessage(@CookieValue("shUserId")
                                   @NotNull(message = "登录异常 请重新登录")
                                   @NotEmpty(message = "登录异常 请重新登录") String shUserId,

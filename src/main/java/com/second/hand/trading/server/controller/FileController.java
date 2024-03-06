@@ -4,6 +4,8 @@ import com.second.hand.trading.server.enums.ErrorMsg;
 import com.second.hand.trading.server.service.FileService;
 import com.second.hand.trading.server.utils.IdFactoryUtil;
 import com.second.hand.trading.server.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @RestController
+@Api(tags = "文件管理")
 public class FileController {
 
     @Value("${userFilePath}")
@@ -31,6 +34,7 @@ public class FileController {
     private FileService fileService;
 
     @PostMapping("/file")
+    @ApiOperation("上传文件")
     public ResultVo uploadFile(@RequestParam("file") MultipartFile multipartFile) {
         String uuid="file"+ IdFactoryUtil.getFileId();
         String fileName= uuid+ multipartFile.getOriginalFilename();
@@ -46,6 +50,7 @@ public class FileController {
     }
 
     @GetMapping("/image")
+    @ApiOperation("获取图片")
     public void getImage(@RequestParam("imageName") String imageName,
                          HttpServletResponse response) throws IOException {
         File fileDir = new File(userFilePath);

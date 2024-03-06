@@ -4,6 +4,9 @@ import com.second.hand.trading.server.enums.ErrorMsg;
 import com.second.hand.trading.server.model.AddressModel;
 import com.second.hand.trading.server.service.AddressService;
 import com.second.hand.trading.server.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +15,14 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/address")
+@Api(tags = "地址管理")
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
 
     @GetMapping("/info")
+    @ApiOperation("获取单个地址信息")
     public ResultVo  getAddress(@CookieValue("shUserId")
                                     @NotNull(message = "登录异常 请重新登录")
                                     @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -30,6 +35,7 @@ public class AddressController {
     }
 
     @PostMapping("/add")
+    @ApiModelProperty(notes = "添加地址信息")
     public ResultVo addAddress(@CookieValue("shUserId")
                                    @NotNull(message = "登录异常 请重新登录")
                                    @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -42,6 +48,7 @@ public class AddressController {
     }
 
     @PostMapping("/update")
+    @ApiModelProperty(notes = "更新地址信息")
     public ResultVo updateAddress(@CookieValue("shUserId")
                                @NotNull(message = "登录异常 请重新登录")
                                @NotEmpty(message = "登录异常 请重新登录") String shUserId,
@@ -54,6 +61,7 @@ public class AddressController {
     }
 
     @PostMapping("/delete")
+    @ApiModelProperty(notes = "删除地址信息")
     public ResultVo deleteAddress(@CookieValue("shUserId")
                                   @NotNull(message = "登录异常 请重新登录")
                                   @NotEmpty(message = "登录异常 请重新登录") String shUserId,

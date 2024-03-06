@@ -4,6 +4,8 @@ import com.second.hand.trading.server.enums.ErrorMsg;
 import com.second.hand.trading.server.model.UserModel;
 import com.second.hand.trading.server.service.UserService;
 import com.second.hand.trading.server.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.sql.Timestamp;
 
 @RestController
 @RequestMapping("user")
+@Api(tags = "用户管理")
 public class UserController {
 
     @Autowired
@@ -28,6 +31,7 @@ public class UserController {
      * @return
      */
     @PostMapping("sign-in")
+    @ApiOperation("注册账号")
     public ResultVo signIn(@RequestBody  UserModel userModel) {
         System.out.println(userModel);
         userModel.setSignInTime(new Timestamp(System.currentTimeMillis()));
@@ -49,6 +53,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("login")
+    @ApiOperation("登录账号")
     public ResultVo login(@RequestParam("accountNumber") @NotEmpty @NotNull String accountNumber,
                           @RequestParam("userPassword") @NotEmpty @NotNull String userPassword,
                           HttpServletResponse response) {
@@ -76,6 +81,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("logout")
+    @ApiOperation("退出登录")
     public ResultVo logout(@CookieValue("shUserId")
                            @NotNull(message = "登录异常 请重新登录")
                            @NotEmpty(message = "登录异常 请重新登录") String shUserId, HttpServletResponse response) {
@@ -94,6 +100,7 @@ public class UserController {
      * @return
      */
     @GetMapping("info")
+    @ApiOperation("获取用户信息")
     public ResultVo getOneUser(@CookieValue("shUserId") @NotNull(message = "登录异常 请重新登录")
                                @NotEmpty(message = "登录异常 请重新登录")
                                        String id) {
@@ -107,6 +114,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/info")
+    @ApiOperation("修改用户公开信息")
     public ResultVo updateUserPublicInfo(@CookieValue("shUserId") @NotNull(message = "登录异常 请重新登录")
                                      @NotEmpty(message = "登录异常 请重新登录")
                                              String id, @RequestBody  UserModel userModel) {
