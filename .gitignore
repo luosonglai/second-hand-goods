@@ -1,0 +1,12 @@
+.idea/
+.vscode/
+target/
+logs/
+*.iml
+.DS_Store
+src/main/resources/db/mes.pdb
+~*.*
+.*
+!.gitignore
+logback-test.xml
+__pycache__
