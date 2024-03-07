@@ -54,4 +54,8 @@ public interface IdleItemService {
     boolean updateIdleItem(IdleItemModel idleItemModel);
 
     PageVo<IdleItemModel> adminGetIdleList(int status, int page, int nums) ;
+
+    PageVo<IdleItemModel> getRecommendedBooks(Long userId, int page, int nums) ;
+
+
 }
