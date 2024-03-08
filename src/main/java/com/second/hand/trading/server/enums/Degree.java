@@ -6,25 +6,24 @@ package com.second.hand.trading.server.enums;
  * @CreateTime:2024/3/610:03
  */
 public enum Degree {
-    All_NEW("allNew","全新"),
-    NINETY_PERCENT_NEW("ninetyPercent","九成新"),
-    EIGHTY_PERCENT_NEW("eightPercent","八成新"),
-    SEVENTY_PERCENT_NEW("servenPercent","七成新");
+    ALL_NEW("全新", 100),
+    NINETY_PERCENT("九成新", 90),
+    EIGHTY_PERCENT("八成新", 80),
+    SEVEN_PERCENT("七成新", 70);
 
-    private final String name;
     private final String display;
+    private final int value;
 
-    Degree(String name, String display) {
-        this.name = name;
+    Degree(String display, int value) {
         this.display = display;
-    }
-
-    public String getName() {
-        return name;
+        this.value = value;
     }
 
     public String getDisplay() {
         return display;
     }
 
+    public int getValue() {
+        return value;
+    }
 }

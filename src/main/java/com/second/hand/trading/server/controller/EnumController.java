@@ -39,22 +39,22 @@ public class EnumController {
             Map<String, Object> enumMap = new HashMap<>();
             enumMap.put("name", enumClass.getSimpleName());
 
-            List<Map<String, String>> enums = new ArrayList<>();
+            List<Map<String, Object>> enums = new ArrayList<>();
             // 获取枚举值
             Object[] enumConstants = enumClass.getEnumConstants();
             for (Object constant : enumConstants) {
                 try {
-                    Field nameField = constant.getClass().getDeclaredField("name");
                     Field displayField = constant.getClass().getDeclaredField("display");
-                    nameField.setAccessible(true);
+                    Field valueField = constant.getClass().getDeclaredField("value"); // 添加数字类型的字段
                     displayField.setAccessible(true);
+                    valueField.setAccessible(true);
 
-                    String name = (String) nameField.get(constant);
                     String display = (String) displayField.get(constant);
+                    int value = (int) valueField.get(constant); // 读取数字类型的值
 
-                    Map<String, String> enumInfo = new HashMap<>();
-                    enumInfo.put("name", name);
+                    Map<String, Object> enumInfo = new HashMap<>();
                     enumInfo.put("display", display);
+                    enumInfo.put("value", value); // 添加数字类型的值到Map中
 
                     enums.add(enumInfo);
                 } catch (Exception e) {
@@ -66,6 +66,5 @@ public class EnumController {
         }
         return result;
     }
-
 
 }
