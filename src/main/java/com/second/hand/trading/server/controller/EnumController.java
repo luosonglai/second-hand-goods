@@ -27,45 +27,21 @@ public class EnumController {
 
 
     @GetMapping("")
-    @ApiOperation("获取所有枚举")
-    public List<Map<String, Object>> allEnums() {
-        List<Map<String, Object>> result = new ArrayList<>();
+    public Map<String, Object> getDegreeEnums() {
+        Map<String, Object> response = new HashMap<>();
 
-        // 获取所有枚举类
-        Class<?>[] enumClasses = {Degree.class}; // 在此处添加你要获取的枚举类
-
-        // 遍历枚举类
-        for (Class<?> enumClass : enumClasses) {
+        List<Map<String, Object>> enumsList = new ArrayList<>();
+        for (Degree degree : Degree.values()) {
             Map<String, Object> enumMap = new HashMap<>();
-            enumMap.put("name", enumClass.getSimpleName());
-
-            List<Map<String, Object>> enums = new ArrayList<>();
-            // 获取枚举值
-            Object[] enumConstants = enumClass.getEnumConstants();
-            for (Object constant : enumConstants) {
-                try {
-                    Field valueField = constant.getClass().getDeclaredField("value");
-                    Field displayField = constant.getClass().getDeclaredField("display");
-
-                    valueField.setAccessible(true);
-                    displayField.setAccessible(true);
-
-                    int value = (int) valueField.get(constant);
-                    String display = (String) displayField.get(constant);
-
-                    Map<String, Object> enumInfo = new HashMap<>();
-                    enumInfo.put("display", display);
-                    enumInfo.put("value", value);
-
-                    enums.add(enumInfo);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            enumMap.put("enums", enums);
-            result.add(enumMap);
+            enumMap.put("display", degree.getDisplay());
+            enumMap.put("value", degree.getValue()); // 添加数字类型字段
+            enumsList.add(enumMap);
         }
-        return result;
+
+        response.put("enums", enumsList);
+        response.put("name", "Degree");
+
+        return response;
     }
 
 

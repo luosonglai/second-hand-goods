@@ -9,7 +9,8 @@ import java.util.Date;
 
 /**
  * sh_idle_item
- * @author 
+ *
+ * @author
  */
 @Data
 public class IdleItemModel implements Serializable {
@@ -61,7 +62,7 @@ public class IdleItemModel implements Serializable {
     /**
      * 新旧程度
      */
-    private int degree;
+    private Integer degree;
 
     /**
      * 用户主键id
@@ -85,15 +86,15 @@ public class IdleItemModel implements Serializable {
         }
         IdleItemModel other = (IdleItemModel) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getIdleName() == null ? other.getIdleName() == null : this.getIdleName().equals(other.getIdleName()))
-            && (this.getIdleDetails() == null ? other.getIdleDetails() == null : this.getIdleDetails().equals(other.getIdleDetails()))
-            && (this.getPictureList() == null ? other.getPictureList() == null : this.getPictureList().equals(other.getPictureList()))
-            && (this.getIdlePrice() == null ? other.getIdlePrice() == null : this.getIdlePrice().equals(other.getIdlePrice()))
-            && (this.getIdlePlace() == null ? other.getIdlePlace() == null : this.getIdlePlace().equals(other.getIdlePlace()))
-            && (this.getIdleLabel() == null ? other.getIdleLabel() == null : this.getIdleLabel().equals(other.getIdleLabel()))
-            && (this.getReleaseTime() == null ? other.getReleaseTime() == null : this.getReleaseTime().equals(other.getReleaseTime()))
-            && (this.getIdleStatus() == null ? other.getIdleStatus() == null : this.getIdleStatus().equals(other.getIdleStatus()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
+                && (this.getIdleName() == null ? other.getIdleName() == null : this.getIdleName().equals(other.getIdleName()))
+                && (this.getIdleDetails() == null ? other.getIdleDetails() == null : this.getIdleDetails().equals(other.getIdleDetails()))
+                && (this.getPictureList() == null ? other.getPictureList() == null : this.getPictureList().equals(other.getPictureList()))
+                && (this.getIdlePrice() == null ? other.getIdlePrice() == null : this.getIdlePrice().equals(other.getIdlePrice()))
+                && (this.getIdlePlace() == null ? other.getIdlePlace() == null : this.getIdlePlace().equals(other.getIdlePlace()))
+                && (this.getIdleLabel() == null ? other.getIdleLabel() == null : this.getIdleLabel().equals(other.getIdleLabel()))
+                && (this.getReleaseTime() == null ? other.getReleaseTime() == null : this.getReleaseTime().equals(other.getReleaseTime()))
+                && (this.getIdleStatus() == null ? other.getIdleStatus() == null : this.getIdleStatus().equals(other.getIdleStatus()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
     }
 
     @Override
@@ -132,5 +133,12 @@ public class IdleItemModel implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public String getDegreeName() {
+        if (degree != null) {
+            return Degree.stateOf(degree);
+        }
+        return "";
     }
 }

@@ -15,7 +15,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, idle_name, idle_details, picture_list, idle_price, idle_place, idle_label, release_time, 
-    idle_status, user_id
+    idle_status,degree, user_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
