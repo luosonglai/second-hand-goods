@@ -26,7 +26,8 @@ import java.util.*;
 public class EnumController {
 
 
-    @GetMapping("/enums")
+    @GetMapping("")
+    @ApiOperation("获取所有枚举")
     public List<Map<String, Object>> allEnums() {
         List<Map<String, Object>> result = new ArrayList<>();
 
