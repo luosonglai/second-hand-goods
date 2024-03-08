@@ -1,6 +1,7 @@
 package com.second.hand.trading.server.model;
 
 import com.second.hand.trading.server.enums.Degree;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.Date;
  * sh_idle_item
  * @author 
  */
+@Data
 public class IdleItemModel implements Serializable {
     /**
      * 自增主键
@@ -59,7 +61,7 @@ public class IdleItemModel implements Serializable {
     /**
      * 新旧程度
      */
-    private Degree degree;
+    private int degree;
 
     /**
      * 用户主键id
@@ -69,100 +71,6 @@ public class IdleItemModel implements Serializable {
     private UserModel user;
 
     private static final long serialVersionUID = 1L;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getIdleName() {
-        return idleName;
-    }
-
-    public void setIdleName(String idleName) {
-        this.idleName = idleName;
-    }
-
-    public String getIdleDetails() {
-        return idleDetails;
-    }
-
-    public void setIdleDetails(String idleDetails) {
-        this.idleDetails = idleDetails;
-    }
-
-    public String getPictureList() {
-        return pictureList;
-    }
-
-    public void setPictureList(String pictureList) {
-        this.pictureList = pictureList;
-    }
-
-    public BigDecimal getIdlePrice() {
-        return idlePrice;
-    }
-
-    public void setIdlePrice(BigDecimal idlePrice) {
-        this.idlePrice = idlePrice;
-    }
-
-    public String getIdlePlace() {
-        return idlePlace;
-    }
-
-    public void setIdlePlace(String idlePlace) {
-        this.idlePlace = idlePlace;
-    }
-
-    public Integer getIdleLabel() {
-        return idleLabel;
-    }
-
-    public void setIdleLabel(Integer idleLabel) {
-        this.idleLabel = idleLabel;
-    }
-
-    public Date getReleaseTime() {
-        return releaseTime;
-    }
-
-    public void setReleaseTime(Date releaseTime) {
-        this.releaseTime = releaseTime;
-    }
-
-    public Byte getIdleStatus() {
-        return idleStatus;
-    }
-
-    public void setIdleStatus(Byte idleStatus) {
-        this.idleStatus = idleStatus;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Degree getDegree() { return degree; }
-
-    public void setDegree(Degree degree) {
-        this.degree = degree;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
 
     @Override
     public boolean equals(Object that) {

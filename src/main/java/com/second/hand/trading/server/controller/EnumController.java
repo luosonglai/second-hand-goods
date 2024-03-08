@@ -44,17 +44,18 @@ public class EnumController {
             Object[] enumConstants = enumClass.getEnumConstants();
             for (Object constant : enumConstants) {
                 try {
+                    Field valueField = constant.getClass().getDeclaredField("value");
                     Field displayField = constant.getClass().getDeclaredField("display");
-                    Field valueField = constant.getClass().getDeclaredField("value"); // 添加数字类型的字段
-                    displayField.setAccessible(true);
-                    valueField.setAccessible(true);
 
+                    valueField.setAccessible(true);
+                    displayField.setAccessible(true);
+
+                    int value = (int) valueField.get(constant);
                     String display = (String) displayField.get(constant);
-                    int value = (int) valueField.get(constant); // 读取数字类型的值
 
                     Map<String, Object> enumInfo = new HashMap<>();
                     enumInfo.put("display", display);
-                    enumInfo.put("value", value); // 添加数字类型的值到Map中
+                    enumInfo.put("value", value);
 
                     enums.add(enumInfo);
                 } catch (Exception e) {
@@ -67,4 +68,11 @@ public class EnumController {
         return result;
     }
 
+
+
 }
+
+
+
+
+
